@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import java.util.List;
 
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity
      */
     private RecyclerView recyclerView;
     //
+    RelativeLayout contextMenu;
+    TaskAdapter taskAdapter;
+    Button done;
+    Button delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +53,35 @@ public class MainActivity extends AppCompatActivity
 
         toolbar.setNavigationIcon(R.drawable.ic_toggle);
 
+        recyclerView =findViewById(R.id.recycler_view);
 
+        contextMenu=(RelativeLayout)findViewById(R.id.context_menu);
+        done = findViewById(R.id.done);
+        delete = findViewById(R.id.delete);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                visibleContextMenu(0);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                   TaskAdapter adapter=(TaskAdapter)recyclerView.getAdapter();
+                    adapter.delete();
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }catch (Exception e){
+
+                }
+
+            }
+        });
+
+        testCard();
         /**
          * if isAdmin return true -> listActive task
          *
@@ -94,7 +128,7 @@ public class MainActivity extends AppCompatActivity
                      */
                     List<Task> taskList = response.body();
 
-                    TaskAdapter taskAdapter = new TaskAdapter(MainActivity.this, taskList);
+                    taskAdapter = new TaskAdapter(MainActivity.this, taskList);
 
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
 
@@ -159,7 +193,7 @@ public class MainActivity extends AppCompatActivity
                      */
                     List<Task> taskList = response.body();
 
-                    TaskAdapter taskAdapter = new TaskAdapter(MainActivity.this, taskList);
+                     taskAdapter = new TaskAdapter(MainActivity.this, taskList);
 
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
 
@@ -278,6 +312,30 @@ public class MainActivity extends AppCompatActivity
              */
             e.printStackTrace();
             return false;
+        }
+    }
+    public void testCard(){
+        List<Task> taskList = Test.getTasks();
+
+        TaskAdapter taskAdapter = new TaskAdapter(MainActivity.this, taskList);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
+
+                    /*
+                     * set layout manager and adapter for recyclerView
+                     *
+                     */
+        //
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(taskAdapter);
+
+
+    }
+    public void visibleContextMenu(int i){
+        if (i==0){
+            contextMenu.setVisibility(View.GONE);
+        }else {
+            contextMenu.setVisibility(View.VISIBLE);
         }
     }
 }

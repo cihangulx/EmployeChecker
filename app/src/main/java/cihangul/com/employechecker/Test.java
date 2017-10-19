@@ -25,7 +25,14 @@ public class Test {
 
     public static List<Task> getTasks() {
 
-        taskList.add(new Task());
+        taskList.add(new Task("id","Uygulama Akış Şeması","Yazılım",null,90,"",false,40,"Mahmut Şeh"));
+        taskList.add(new Task("id","Uygulama Akış Şeması","Yazılım",null,90,"",false,40,"Mahmut Şeh"));
+        taskList.add(new Task("id","Uygulama Akış Şeması","Yazılım",null,90,"",false,40,"Mahmut Şeh"));
+        taskList.add(new Task("id","Uygulama Akış Şeması","Yazılım",null,90,"",false,40,"Mahmut Şeh"));
+        taskList.add(new Task("id","Uygulama Akış Şeması","Yazılım",null,90,"",false,40,"Mahmut Şeh"));
+        taskList.add(new Task("id","Uygulama Akış Şeması","Yazılım",null,90,"",false,40,"Mahmut Şeh"));
+        taskList.add(new Task("id","Uygulama Akış Şeması","Yazılım",null,90,"",false,40,"Mahmut Şeh"));
+        taskList.add(new Task("id","Uygulama Akış Şeması","Yazılım",null,90,"",false,40,"Mahmut Şeh"));
 
         return taskList;
     }

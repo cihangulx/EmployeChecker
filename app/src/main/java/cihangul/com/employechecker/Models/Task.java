@@ -10,17 +10,18 @@ public class Task {
 
     private String id;
     private String title;
-    private Department department;
+    private String department;
     private List<Step> stepList;
     private int progress;
     private String sure;
     private boolean isComplate;
     private int minAccess;
+    private String sorumlu;
 
     public Task() {
     }
 
-    public Task(String id, String title, Department department, List<Step> stepList, int progress, String sure, boolean isComplate, int minAccess) {
+    public Task(String id, String title, String department, List<Step> stepList, int progress, String sure, boolean isComplate, int minAccess, String sorumlu) {
         this.id = id;
         this.title = title;
         this.department = department;
@@ -29,6 +30,15 @@ public class Task {
         this.sure = sure;
         this.isComplate = isComplate;
         this.minAccess = minAccess;
+        this.sorumlu = sorumlu;
+    }
+
+    public String getSorumlu() {
+        return sorumlu;
+    }
+
+    public void setSorumlu(String sorumlu) {
+        this.sorumlu = sorumlu;
     }
 
     public String getId() {
@@ -47,11 +57,12 @@ public class Task {
         this.title = title;
     }
 
-    public Department getDepartment() {
+
+    public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 
